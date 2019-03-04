@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 
 const PORT = process.env.PORT || 5000;
 const TOKEN = 'random_token_you_set_on_the_frm';
@@ -7,6 +8,14 @@ const TOKEN = 'random_token_you_set_on_the_frm';
 const app = express();
 
 app.set('port', PORT);
+
+app.use(helmet.hidePoweredBy());
+app.use(helmet.hsts());
+app.use(helmet.ieNoOpen());
+app.use(helmet.noCache());
+app.use(helmet.noSniff());
+app.use(helmet.referrerPolicy());
+app.use(helmet.xssFilter());
 
 app.use(bodyParser.json());
 
